@@ -1,0 +1,295 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.006968969269426973 -0.9443873759871014 -0.32876118618766226 3.1816249196693986
+  position 0.5766824464496577 4.703970175982582 -4.690964362681865
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+  floorAppearance Parquetry {
+    type "light strip"
+  }
+}
+Robot {
+  translation 0.6656795993644723 0.04581629251904179 -1.2259069985060538
+  rotation -0.01055532217221392 -0.9998927807143758 0.010149495017677477 1.589592969629142
+  children [
+    DEF Compass Compass {
+      name "Compass"
+    }
+    DEF Receiver Receiver {
+      name "Receiver"
+    }
+    DEF Lidar Lidar {
+      translation -5.19723e-15 0.057 1.01961e-08
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.026
+            radius 0.02
+          }
+        }
+      ]
+      name "Lidar"
+      horizontalResolution 10
+      fieldOfView 1
+      numberOfLayers 1
+      maxRange 0.14
+      type "rotating"
+    }
+    DEF GPS GPS {
+      translation -0.03 0.045 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.005 0.005 0.005
+          }
+        }
+      ]
+      name "GPS"
+    }
+    DEF rightDistanceSensor DistanceSensor {
+      translation 0.035 0 0.02
+      rotation 0 1 0 -0.523595307179586
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0 0
+            }
+          }
+          geometry Box {
+            size 0.003 0.003 0.003
+          }
+        }
+      ]
+      name "rightDistanceSensor"
+      numberOfRays 2
+      aperture 1
+    }
+    DEF leftDistanceSensor DistanceSensor {
+      translation 0.035 0 -0.02
+      rotation 0 1 0 0.523599
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0 0
+            }
+          }
+          geometry Box {
+            size 0.003 0.003 0.003
+          }
+        }
+      ]
+      name "leftDistanceSensor"
+      numberOfRays 2
+      aperture 1
+    }
+    DEF camera Camera {
+      translation 0.04 0 0
+      rotation 0 -1 0 1.57
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.00784314 0.0431373 0.560784
+            }
+          }
+          geometry Box {
+            size 0.003 0.003 0.003
+          }
+        }
+      ]
+      width 1920
+      height 1080
+    }
+    DEF rightJoint HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1855.7166516120485
+        axis 0 0 -1
+        anchor 0 -0.026 0.035
+      }
+      device [
+        DEF rightMotor RotationalMotor {
+          name "rightMotor"
+        }
+        DEF ps_r PositionSensor {
+          name "ps_r"
+        }
+      ]
+      endPoint Solid {
+        translation 1.3532019702205527e-05 -0.026017786213999177 0.03521776265169907
+        rotation -0.3585707634469406 0.6600246277387224 0.6601473308129323 3.8320520017354536
+        children [
+          DEF shapeRightWheel Shape {
+            appearance Appearance {
+              material Material {
+                emissiveColor 0.666667 0 0
+              }
+              texture ImageTexture {
+                url [
+                  "textures/plastic.jpg"
+                ]
+              }
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.02
+            }
+          }
+        ]
+        boundingObject USE shapeRightWheel
+        physics Physics {
+        }
+        linearVelocity -0.00036741056583330256 1.1047234820431328e-07 0.01999444896892125
+        angularVelocity 0.9997478182008739 -2.0674595854781303e-05 0.018382854051483814
+      }
+    }
+    DEF leftJoint HingeJoint {
+      jointParameters HingeJointParameters {
+        position 1532.1347488895
+        axis 0 0 -1
+        anchor 0 -0.026 -0.035
+      }
+      device [
+        DEF ps_l PositionSensor {
+          name "ps_l"
+        }
+        DEF leftMotor RotationalMotor {
+          name "leftMotor"
+        }
+      ]
+      endPoint Solid {
+        translation -7.3190099271361265e-06 -0.02600311399332937 -0.035008909005495525
+        rotation -0.8009713459798544 -0.4230840541287008 -0.42360923745976403 4.492050109464607
+        children [
+          DEF shapeLeftWheel Shape {
+            appearance Appearance {
+              material Material {
+                emissiveColor 0.666667 0 0
+              }
+              texture ImageTexture {
+                url [
+                  "textures/plastic.jpg"
+                ]
+              }
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.02
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE shapeLeftWheel
+        physics Physics {
+        }
+        linearVelocity -0.0003675966697242343 -1.6626145047744389e-07 0.019995150875014165
+        angularVelocity 0.9997478469303465 -2.0682084994184264e-05 0.018382840816455272
+      }
+    }
+    DEF shapeRobot Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0 0
+          shininess 0.4
+        }
+        texture ImageTexture {
+          url [
+            "textures/metal.jpg"
+          ]
+        }
+      }
+      geometry Cylinder {
+        height 0.09
+        radius 0.04
+      }
+    }
+  ]
+  boundingObject USE shapeRobot
+  physics Physics {
+  }
+  controller "robot_controller"
+  linearVelocity -0.0003597185116215217 3.3964248546817564e-06 0.020003113798102313
+  angularVelocity -7.739844234405519e-05 0.0001886939428222191 -0.0003107596263393791
+}
+SolidBox {
+  translation -0.27123301600334393 0.14411380119867043 -0.07334428446296351
+  rotation -7.20842872879869e-07 0.9999999999996974 -2.9285500532990745e-07 1.5763995508214892
+  size 0.1 0.3 0.5
+  physics Physics {
+  }
+}
+SolidBox {
+  translation 0.8056578297739998 0.09607600024846115 -0.7413608150891483
+  rotation 6.972543898312828e-13 -1 2.9836424949598417e-12 -1.10138
+  name "box(2)"
+  size 0.1 0.2 0.5
+  physics Physics {
+  }
+}
+SolidBox {
+  translation 0.40623459755841346 0.09686080041138835 0.7857494889252913
+  rotation 4.81413909811694e-16 -1 -1.9684563710973638e-17 -0.04726871846673707
+  name "box(1)"
+  size 0.1 0.2 0.4
+  physics Physics {
+  }
+}
+SolidBox {
+  translation 0.5477987427776706 0.0968607535175549 0.07714863080142172
+  rotation -9.922575221689167e-07 0.9999999999994663 -2.879440607843735e-07 1.6868972928902162
+  name "box(3)"
+  size 0.1 0.2 0.4
+  physics Physics {
+  }
+}
+SolidBox {
+  translation 0.6531960300389505 0.09686080041138838 0.6322131713121765
+  rotation 6.899627715088917e-17 1 2.0649004284750797e-17 1.5711213757554514
+  name "box(4)"
+  size 0.1 0.2 0.4
+  physics Physics {
+  }
+}
+DEF obj Robot {
+  translation 0.5487527969842646 0.049607551551972065 0.8675837601869806
+  rotation -6.627811986245563e-07 0.9999999999996794 4.489581717009675e-07 1.5926280053989257
+  children [
+    DEF Emitter Emitter {
+      name "Emitter"
+    }
+    DEF Gps GPS {
+      name "Gps"
+    }
+    DEF object Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 0
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "obj"
+  boundingObject USE object
+  physics Physics {
+  }
+  controller "target"
+  linearVelocity 4.373506647239293e-07 3.7942922901219014e-07 7.917604324113251e-08
+  angularVelocity 1.5834901156037882e-06 1.4508811864653051e-16 -8.746843441332419e-06
+}
