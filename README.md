@@ -1,2 +1,2 @@
 # bug_algorithm
-A simple implementation of the bug0 algorithm in Webots simulator
+An implementation of the three bug algorithms in Webots simulator inspired by https://github.com/arminparnian/bug_algorithm
